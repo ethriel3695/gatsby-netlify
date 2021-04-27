@@ -1,8 +1,8 @@
 ---
 templateKey: blog-post
-slug: "{{slug}}"
+slug: this-is-a-test-article
 title: This is a test article
-date: 2021-04-27T21:44:05.570Z
+date: 2021-04-27
 description: This is the description for the text
 tags:
   - cms
