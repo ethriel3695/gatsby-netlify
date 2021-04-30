@@ -6,7 +6,7 @@ const BlogPostPreview = ({ entry, widgetFor }) => {
   // const tags = entry.getIn(['data', 'tags']);
   return (
     <PostContainer
-      data={widgetFor('body')}
+      data={entry.getIn(['data', 'body'])}
       frontmatter={entry.getIn(['data', 'title'])}
       // tags={tags && tags.toJS()}
       // title={entry.getIn(['data', 'title'])}
