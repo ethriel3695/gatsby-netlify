@@ -24,6 +24,8 @@ const components = {
 };
 
 export default function PostContainer({ data, frontmatter }) {
+  console.log(data);
+  console.log(frontmatter);
   const { title } = frontmatter;
 
   return (
