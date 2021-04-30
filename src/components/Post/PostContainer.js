@@ -24,19 +24,19 @@ const components = {
 };
 
 export default function PostContainer({ data, frontmatter }) {
-  const { banner, title, date, showBanner } = frontmatter;
+  const { title } = frontmatter;
 
   return (
     <div className="post-single-container">
       <article className="post-single">
         <header>
-          {banner && showBanner ? (
+          {/*banner && showBanner ? (
             <Img
               fluid={banner.sharp.fluid}
               alt={title}
               style={{ height: '70vh', textAlign: 'center' }}
             />
-          ) : null}
+          ) : null*/}
           <h1 className="text-center">{title}</h1>
           {/* <div className="text-md text-center">
             <span>{date}</span>

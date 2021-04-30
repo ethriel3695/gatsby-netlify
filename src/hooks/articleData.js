@@ -5,19 +5,17 @@ export const useArticleData = () => {
     query DefaultBlogQuery {
       allMdx(
         sort: { order: DESC, fields: [frontmatter___date] }
-        filter: {
-          frontmatter: { published: { eq: true }, slug: { regex: "/blog/" } }
-        }
+        filter: { frontmatter: { published: { eq: true } } }
       ) {
         nodes {
           id
+          slug
           frontmatter {
             title
-            slug
             description
             date(formatString: "MMMM Do, YYYY")
             author
-            categories
+            tags
           }
         }
       }

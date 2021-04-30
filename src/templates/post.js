@@ -42,11 +42,10 @@ export default function Post({ pageContext, data: { mdx: post } }) {
 
 export const pageQuery = graphql`
   query($slug: String!) {
-    mdx(frontmatter: { slug: { eq: $slug } }) {
+    mdx(slug: { eq: $slug }) {
       frontmatter {
         title
-        description
-        categories
+        tags
         date(formatString: "dddd MMMM Do, YYYY")
       }
       body

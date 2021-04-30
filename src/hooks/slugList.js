@@ -8,15 +8,15 @@ export const useSlugList = () => {
         filter: {
           frontmatter: {
             published: { eq: true }
-            categories: { nin: ["blog", "thanks"] }
+            tags: { nin: ["blog", "thanks"] }
           }
         }
       ) {
         nodes {
           id
+          slug
           frontmatter {
             title
-            slug
             label
           }
         }
