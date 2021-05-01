@@ -19,7 +19,7 @@ export default function Post({ pageContext, data: { mdx: post } }) {
           description={post.frontmatter.description}
           categories={post.frontmatter.categories}
         >
-          <PostContainer data={post.rawBody} frontmatter={post.frontmatter} />
+          <PostContainer data={post.body} frontmatter={post.frontmatter} />
         </AuthContainer>
       ) : (
         <NoAuthContainer
@@ -33,7 +33,7 @@ export default function Post({ pageContext, data: { mdx: post } }) {
           description={post.frontmatter.description}
           categories={post.frontmatter.categories}
         >
-          <PostContainer data={post.rawBody} frontmatter={post.frontmatter} />
+          <PostContainer data={post.body} frontmatter={post.frontmatter} />
         </NoAuthContainer>
       )}
     </div>
@@ -48,7 +48,7 @@ export const pageQuery = graphql`
         tags
         date(formatString: "dddd MMMM Do, YYYY")
       }
-      rawBody
+      body
     }
   }
 `;
