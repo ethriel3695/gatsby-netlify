@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PostContainer from '../../components/Post/PostContainer';
+import CMSPostContainer from '../../components/Post/CMSPostContainer';
 
-const BlogPostPreview = ({ entry, widgetFor }) => {
+const BlogPostPreview = ({ entry }) => {
   // const tags = entry.getIn(['data', 'tags']);
   return (
-    <PostContainer
+    <CMSPostContainer
       data={entry.getIn(['data', 'body'])}
       frontmatter={entry.getIn(['data', 'title'])}
       // tags={tags && tags.toJS()}
