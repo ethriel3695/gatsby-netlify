@@ -21,8 +21,6 @@ const components = {
 };
 
 export default function CMSPostContainer({ data, frontmatter }) {
-  console.log(data);
-  console.log(frontmatter);
   const { title } = frontmatter;
 
   return (
@@ -32,7 +30,7 @@ export default function CMSPostContainer({ data, frontmatter }) {
           <h1 className="text-center">{title}</h1>
         </header>
         <div className="text-left container">
-          <RenderMarkdown md={data} />
+          <RenderMarkdown md={data.body} />
         </div>
       </article>
     </div>
