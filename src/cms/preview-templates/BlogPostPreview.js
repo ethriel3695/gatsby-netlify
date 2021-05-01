@@ -6,7 +6,7 @@ const BlogPostPreview = ({ entry }) => {
   // const tags = entry.getIn(['data', 'tags']);
   return (
     <CMSPostContainer
-      data={entry.getIn(['data', 'body'])}
+      data={entry.getIn(['data', 'body']).toJS()}
       frontmatter={entry.getIn(['data', 'title'])}
       // tags={tags && tags.toJS()}
       // title={entry.getIn(['data', 'title'])}
