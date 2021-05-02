@@ -30,7 +30,7 @@ export default function CMSPostContainer({ data, frontmatter }) {
           <h1 className="text-center">{title}</h1>
         </header>
         <div className="text-left container">
-          <RenderMarkdown md={data.body} />
+          <div dangerouslySetInnerHTML={{ __html: data.body }} />
         </div>
       </article>
     </div>
