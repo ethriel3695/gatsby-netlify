@@ -22,6 +22,7 @@ const components = {
 
 export default function CMSPostContainer({ data, frontmatter }) {
   const { title } = frontmatter;
+  console.log(data.body);
 
   return (
     <div className="post-single-container">
