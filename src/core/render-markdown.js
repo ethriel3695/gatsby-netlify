@@ -2,7 +2,6 @@ import { MDXProvider } from '@mdx-js/react';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { CatchError } from './catch-error';
 import { CMS_COMPONENTS } from '../cms/cms-components';
 
 /* Use this component to parse markdown using MDX. See MDX runtime for details.
@@ -12,11 +11,10 @@ import { CMS_COMPONENTS } from '../cms/cms-components';
  * @md: string - Markdown to be parsed
  */
 
-export const RenderMarkdown = ({ md }) => (
-  <CatchError>
-    <MDXProvider components={{ ...CMS_COMPONENTS }}>{md}</MDXProvider>
-  </CatchError>
-);
+export const RenderMarkdown = ({ md }) => {
+  console.log(md);
+  return <MDXProvider components={{ ...CMS_COMPONENTS }}>{md}</MDXProvider>;
+};
 
 RenderMarkdown.defaultProps = {
   md: '',

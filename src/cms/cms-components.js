@@ -10,7 +10,10 @@ import { Heading } from '../components/Mdx/Heading';
 
 // Include any tags you'd like to replace with React components
 export const CMS_COMPONENTS = {
-  h1: props => <Heading tag={1} {...props} />,
+  h1: props => {
+    console.log(props);
+    <Heading tag={1} {...props} />;
+  },
   h2: props => <Heading tag={2} {...props} />,
   h3: props => <Heading tag={3} {...props} />,
   h4: props => <Heading tag={4} {...props} />,

@@ -1,5 +1,7 @@
 # Gatsby Theme Contentful
 
+npx netlify-cms-proxy-server
+
 ## Currently supported functionality:
 
 1. Auth0 - For authentication if the flag `isAuthApp` is set to true

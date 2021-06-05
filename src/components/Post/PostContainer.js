@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 import CodeBlock from '../../CodeBlock';
+import Content from '../Post/Content';
 
 // const Pre = props => (
 //   <pre
@@ -21,6 +22,26 @@ const components = {
   // pre: Pre,
   code: Code,
   inlineCode: InlineCode,
+};
+
+export const BlogPostTemplate = ({ content, contentComponent, data }) => {
+  console.log(data.date);
+  const PostContent = contentComponent || Content;
+  return (
+    <div className="post-single-container">
+      <article className="post-single">
+        <header>
+          <h1 className="text-center">{data.title}</h1>
+          <div className="text-md text-center">
+            <span>{`${data.date}`}</span>
+          </div>
+        </header>
+        <div className="text-left container">
+          <PostContent content={content} />
+        </div>
+      </article>
+    </div>
+  );
 };
 
 export default function PostContainer({ data, frontmatter }) {

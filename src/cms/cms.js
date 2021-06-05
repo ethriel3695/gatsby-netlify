@@ -1,4 +1,5 @@
 import CMS from 'netlify-cms-app';
+import '../styles/global.css';
 // import uploadcare from 'netlify-cms-media-library-uploadcare';
 // import cloudinary from 'netlify-cms-media-library-cloudinary';
 

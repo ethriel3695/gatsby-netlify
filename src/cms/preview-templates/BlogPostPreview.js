@@ -1,15 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CMSPostContainer from '../../components/Post/CMSPostContainer';
+import { BlogPostTemplate } from '../../components/Post/PostContainer';
 
-const BlogPostPreview = ({ entry }) => {
+const BlogPostPreview = ({ entry, widgetFor }) => {
   // const tags = entry.getIn(['data', 'tags']);
+  const title = entry.getIn(['data', 'title']);
+  const date = entry.getIn(['data', 'date']);
+  const data = {
+    title,
+    date,
+  };
+  console.log(data);
   return (
-    <CMSPostContainer
-      data={entry.getIn(['data']).toJS()}
-      frontmatter={entry.getIn(['data', 'title'])}
+    <BlogPostTemplate
+      content={widgetFor('body')}
+      isPreview={true}
       // tags={tags && tags.toJS()}
-      // title={entry.getIn(['data', 'title'])}
+      data={data}
     />
   );
 };
@@ -18,7 +25,6 @@ BlogPostPreview.propTypes = {
   entry: PropTypes.shape({
     getIn: PropTypes.func,
   }),
-  widgetFor: PropTypes.func,
 };
 
 export default BlogPostPreview;
