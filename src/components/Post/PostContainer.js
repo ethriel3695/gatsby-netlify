@@ -1,17 +1,9 @@
 import React from 'react';
-import Img from 'gatsby-image';
-import classNames from 'classnames';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 import CodeBlock from '../../CodeBlock';
 import Content from '../Post/Content';
 
-// const Pre = props => (
-//   <pre
-//     {...props}
-//     className="font-mono scrollbar-none text-white bg-gray-800 overflow-auto rounded-md"
-//   />
-// );
 const Code = CodeBlock;
 
 const InlineCode = props => (
@@ -25,7 +17,6 @@ const components = {
 };
 
 export const BlogPostTemplate = ({ content, contentComponent, data }) => {
-  console.log(data.date);
   const PostContent = contentComponent || Content;
   return (
     <div className="post-single-container">
@@ -45,8 +36,6 @@ export const BlogPostTemplate = ({ content, contentComponent, data }) => {
 };
 
 export default function PostContainer({ data, frontmatter }) {
-  console.log(data);
-  console.log(frontmatter);
   const { title } = frontmatter;
 
   return (

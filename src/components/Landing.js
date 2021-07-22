@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { SectionWidget } from './PageWidget/SectionWidget';
 
 export default function Landing({ pageContext, page }) {
@@ -8,7 +8,7 @@ export default function Landing({ pageContext, page }) {
   const data = page.section;
   const hero = data[0].image ? (
     <div className="max-w-full">
-      <Image fluid={data[0].image.fluid} />
+      <GatsbyImage image={data[0].image.gatsbyImageData} />
     </div>
   ) : (
     ''

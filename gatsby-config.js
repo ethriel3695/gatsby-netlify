@@ -14,8 +14,6 @@ module.exports = {
     description: `Welcome to a Different World`,
     greeting: ``,
     copyright: `Copyright © 2021 Reuben Ellis LLC`,
-    loginDesc: '',
-    isAuthApp: false,
     newsletterTitle: '',
     social: {
       facebook: 'https://www.facebook.com/reuben.ellis.338',
@@ -105,6 +103,7 @@ module.exports = {
         typeName: 'Navigation',
       },
     },
+    `gatsby-plugin-image`,
     {
       resolve: 'gatsby-plugin-sharp',
       options: {
@@ -113,6 +112,7 @@ module.exports = {
         defaultQuality: 75,
       },
     },
+    `gatsby-transformer-sharp`,
     // {
     //   resolve: `gatsby-plugin-gtag`,
     //   options: {
@@ -125,7 +125,6 @@ module.exports = {
     //     defer: true,
     //   },
     // },
-    'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-plugin-manifest`,

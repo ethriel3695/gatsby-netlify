@@ -1,15 +1,13 @@
 import React from 'react';
 import Layout from '../layout';
-import SEO from '../seo';
+import Seo from '../seo';
 
-export default function NoAuthContainer({
+export default function LayoutContainer({
   siteTitle,
   brand,
   hero,
   newsletter,
   copyright,
-  loginOption,
-  isAuthApp,
   slugs,
   children,
   title,
@@ -23,11 +21,9 @@ export default function NoAuthContainer({
       hero={hero}
       newsletter={newsletter}
       copyright={copyright}
-      loginOption={loginOption}
-      isAuthApp={isAuthApp}
       slugs={slugs}
     >
-      <SEO title={title} description={description} keywords={categories} />
+      <Seo title={title} description={description} keywords={categories} />
       {children}
     </Layout>
   );

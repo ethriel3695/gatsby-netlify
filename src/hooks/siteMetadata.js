@@ -10,8 +10,6 @@ export const useSiteMetadata = () => {
           greeting
           copyright
           author
-          loginDesc
-          isAuthApp
           newsletterTitle
           hasNotifications
           hasCTA

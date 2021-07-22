@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 const CardImage = ({ className, fluid, ...params }) => {
   const classNames =
@@ -7,9 +7,9 @@ const CardImage = ({ className, fluid, ...params }) => {
   return (
     <div>
       {fluid && (
-        <Image
+        <GatsbyImage
           className={`${classNames} ${className && className}`}
-          fluid={fluid}
+          image={fluid}
           {...params}
         />
       )}

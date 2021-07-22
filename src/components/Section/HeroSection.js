@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 export const HeroSection = ({ section }) => {
@@ -65,7 +65,7 @@ export const HeroSection = ({ section }) => {
           </div>
 
           <picture>
-            <Image
+            <GatsbyImage
               className="object-cover"
               style={{
                 width: '100%',
@@ -73,7 +73,7 @@ export const HeroSection = ({ section }) => {
                 minHeight: 600,
                 maxWidth: 2000,
               }}
-              fluid={section.file.fluid}
+              image={section.file.fluid}
             />
           </picture>
         </div>

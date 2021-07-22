@@ -1,7 +1,8 @@
 import React from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import vsDark from 'prism-react-renderer/themes/vsDark';
-export default ({ children, className }) => {
+
+const CodeBlock = ({ children, className }) => {
   const language = className.replace(/language-/, '');
   return (
     <Highlight
@@ -12,7 +13,7 @@ export default ({ children, className }) => {
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
-          className={(className, 'overflow-auto')}
+          className={`${className} overflow-auto`}
           style={{ ...style, padding: '20px' }}
         >
           {tokens.map((line, i) => (
@@ -27,3 +28,5 @@ export default ({ children, className }) => {
     </Highlight>
   );
 };
+
+export default CodeBlock;

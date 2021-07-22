@@ -1,23 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'gatsby';
-import Image from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { FaBars } from 'react-icons/fa';
-import { useSiteMetadata } from '../../hooks/siteMetadata';
 import { useBrandData } from '../../hooks/brandData';
-// import useIsIOS from '../../utils/useIsIOS';
 import MenuMobile from '../Menu/MenuMobile';
 import NavItem from '../Menu/NavItem';
 import { useSlugList } from '../../hooks/slugList';
 import { buildNav } from '../../utils/buildNav';
 
-const Header = ({
-  isAuthenticated = false,
-  logout = false,
-  loginWithRedirect = null,
-}) => {
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const { loginDesc, isAuthApp } = useSiteMetadata();
 
   const data = useBrandData();
   const navList = useSlugList();
@@ -38,9 +30,9 @@ const Header = ({
       logo = brandLogo.publicURL;
       BrandContainer = <img src={logo} className="headerLogoSize" alt={alt} />;
     } else {
-      logo = brandLogo.childImageSharp.fluid;
+      logo = brandLogo.childImageSharp.gatsbyImageData;
       BrandContainer = (
-        <Image fluid={logo} className="headerLogoSize" alt={alt} />
+        <GatsbyImage image={logo} className="headerLogoSize" alt={alt} />
       );
     }
   } else {
@@ -57,62 +49,28 @@ const Header = ({
     >
       <div className="flex justify-between items-center">
         <Link to="/">{BrandContainer}</Link>
-        {(isAuthenticated && isAuthApp) || !isAuthApp ? (
-          <div>
-            <button
-              className="sm:hidden"
-              onClick={() => setIsOpen(true)}
-              aria-label="Open Menu"
-            >
-              <FaBars className="h-6 w-auto text-gray-900 fill-current -mt-1" />
-            </button>
-
-            <div className="hidden sm:block">
-              {navs.map((nav, key) => (
-                <NavItem
-                  key={`menu_desktop_link${key}`}
-                  to={nav.route}
-                  activeClassName="borderPrimaryActive"
-                >
-                  {nav.label}
-                </NavItem>
-              ))}
-              {isAuthApp && (
-                <NavItem
-                  key={`menu_logout`}
-                  activeClassName=""
-                  to={'/'}
-                  onClick={() => {
-                    logout({ returnTo: window.location.origin });
-                  }}
-                >
-                  Logout
-                </NavItem>
-              )}
-            </div>
-          </div>
-        ) : (
-          <NavItem
-            key={`menu_login`}
-            activeClassName=""
-            to={'/'}
-            onClick={() => {
-              loginWithRedirect();
-            }}
+        <div>
+          <button
+            className="sm:hidden"
+            onClick={() => setIsOpen(true)}
+            aria-label="Open Menu"
           >
-            Login
-          </NavItem>
-        )}
+            <FaBars className="h-6 w-auto text-gray-900 fill-current -mt-1" />
+          </button>
+          <div className="hidden sm:block">
+            {navs.map((nav, key) => (
+              <NavItem
+                key={`menu_desktop_link${key}`}
+                to={nav.route}
+                activeClassName="borderPrimaryActive"
+              >
+                {nav.label}
+              </NavItem>
+            ))}
+          </div>
+        </div>
       </div>
-      <MenuMobile
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        navs={navs}
-        login={loginWithRedirect}
-        logout={logout}
-        isAuthenticated={isAuthenticated}
-        isAuthApp={isAuthApp}
-      />
+      <MenuMobile isOpen={isOpen} setIsOpen={setIsOpen} navs={navs} />
     </div>
   );
 };

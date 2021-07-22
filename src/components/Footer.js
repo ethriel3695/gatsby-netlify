@@ -13,7 +13,10 @@ import { useSocialInfo } from '../hooks/socialInfo';
 // import { CallToAction } from '../components/Section/CallToAction';
 
 export default function Footer() {
-  const { copyright, hasCTA } = useSiteMetadata();
+  const {
+    copyright,
+    // hasCTA
+  } = useSiteMetadata();
   const { email, facebook, twitter, github, instagram } = useSocialInfo();
   const links = useExternalLinks();
   // const section = useCTAData()[0];
