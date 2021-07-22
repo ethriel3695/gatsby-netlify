@@ -60,6 +60,15 @@ module.exports = {
         remarkPlugins: [require(`remark-slug`)],
       },
     },
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        // Setting a color is optional.
+        color: `rebeccapurple`,
+        // Disable the loading spinner.
+        showSpinner: true,
+      },
+    },
     'gatsby-plugin-postcss',
     // {
     //   resolve: 'gatsby-plugin-purgecss',
@@ -139,13 +148,5 @@ module.exports = {
         crossOrigin: `use-credentials`,
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-offline',
-    //   options: {
-    //     workboxConfig: {
-    //       globPatterns: ['**/*'],
-    //     },
-    //   },
-    // },
   ].filter(Boolean),
 };
