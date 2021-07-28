@@ -7,7 +7,7 @@ import {
   faGithub,
   faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
-import { useExternalLinks } from '../hooks/externalLinks';
+// import { useExternalLinks } from '../hooks/externalLinks';
 import { useSiteMetadata } from '../hooks/siteMetadata';
 import { useSocialInfo } from '../hooks/socialInfo';
 // import { CallToAction } from '../components/Section/CallToAction';
@@ -18,7 +18,7 @@ export default function Footer() {
     // hasCTA
   } = useSiteMetadata();
   const { email, facebook, twitter, github, instagram } = useSocialInfo();
-  const links = useExternalLinks();
+  // const links = useExternalLinks();
   // const section = useCTAData()[0];
   let social = [];
   let SocialContainer = null;
@@ -60,8 +60,7 @@ export default function Footer() {
   }
   return (
     <footer>
-      <div>
-        {/*hasCTA && <CallToAction section={section} />*/}
+      {/* <div>
         {links.map((link, index) => (
           <div key={`container-${index}`} className="text-center">
             <a
@@ -76,6 +75,7 @@ export default function Footer() {
           </div>
         ))}
       </div>
+    */}
       {SocialContainer}
       <div>
         <div>

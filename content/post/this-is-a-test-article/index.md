@@ -1,5 +1,5 @@
 ---
-templateKey: blog-post
+templateKey: post
 slug: this-is-a-test-article
 title: This is a test article
 date: 2021-04-27

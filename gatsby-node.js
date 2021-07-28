@@ -10,7 +10,7 @@ let assetPath;
 
 // These templates are simply data-fetching wrappers that import components
 const PostTemplate = require.resolve(`./src/templates/post`);
-// const PageTemplate = require.resolve(`./src/templates/page.js`);
+const HomeTemplate = require.resolve(`./src/templates/page.js`);
 
 // Verify the data directory exists
 exports.onPreBootstrap = ({ store, reporter }, options) => {
@@ -49,7 +49,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         siteMetadata {
           title
           description
-          greeting
           copyright
           author
         }
@@ -62,6 +61,33 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             title
             tags
             published
+            templateKey
+          }
+        }
+      }
+      posts: allStoryblokEntry(filter: { field_component: { eq: "article" } }) {
+        edges {
+          node {
+            id
+            name
+            slug
+            field_component
+            full_slug
+            path
+            content
+          }
+        }
+      }
+      stories: allStoryblokEntry(filter: { field_component: { eq: "page" } }) {
+        edges {
+          node {
+            id
+            name
+            slug
+            field_component
+            full_slug
+            path
+            content
           }
         }
       }
@@ -91,51 +117,84 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   // Create Posts and Post pages.
-  const {
-    site: { siteMetadata },
-    brandLogo,
-    newsletter,
-  } = result.data;
-  const posts = result.data.allMdx.nodes;
+  // const {
+  //   site: { siteMetadata },
+  //   brandLogo,
+  //   newsletter,
+  // } = result.data;
+  // const pages = result.data.allMdx.nodes;
 
-  if (posts.length > 0) {
-    const {
-      title: siteTitle,
-      description: siteDescription,
-      social: socialLinks,
-      copyright: copyrightMessage,
-      greeting: siteGreeting,
-    } = siteMetadata;
-    const brand = brandLogo;
+  const entries = result.data.stories.edges;
+  // const posts = result.data.stories.edges;
 
-    // Create a page for each Article from "mdx"
-    posts.forEach((post, index) => {
-      const slug = post.slug;
-      const previousPostId = index === 0 ? null : posts[index - 1].id;
-      const nextPostId =
-        index === posts.length - 1 ? null : posts[index + 1].id;
-      if (!slug) {
-        return false;
+  if (entries) {
+    entries.forEach(entry => {
+      if (entry.node.full_slug === 'home') {
+        const page = {
+          path: `${entry.node.path}`,
+          component: require.resolve(HomeTemplate),
+          context: {
+            story: entry.node,
+          },
+        };
+        createPage(page);
       }
-      createPage({
-        path: slug,
-        component: require.resolve(PostTemplate),
-        context: {
-          id: post.id,
-          previousPostId,
-          nextPostId,
-          siteTitle,
-          siteDescription,
-          siteGreeting,
-          copyrightMessage,
-          socialLinks,
-          brand,
-          newsletter,
-          slug,
-        },
-      });
     });
   }
+
+  // if (posts) {
+  //   posts.forEach(post => {
+  //     const page = {
+  //       path: `${post.node.path}`,
+  //       component: require.resolve(PostTemplate),
+  //       context: {
+  //         story: post.node,
+  //       },
+  //     };
+  //     createPage(page);
+  //   });
+  // }
+
+  // if (pages.length > 0) {
+  //   const {
+  //     title: siteTitle,
+  //     description: siteDescription,
+  //     social: socialLinks,
+  //     copyright: copyrightMessage,
+  //     greeting: siteGreeting,
+  //   } = siteMetadata;
+  //   const brand = brandLogo;
+
+  //   // Create a page for each Article from "mdx"
+  //   pages.forEach((page, index) => {
+  //     const slug = page.slug;
+  //     const previousPostId = index === 0 ? null : pages[index - 1].id;
+  //     const nextPostId =
+  //       index === pages.length - 1 ? null : pages[index + 1].id;
+  //     if (!slug) {
+  //       return false;
+  //     }
+  //     if (post.templateKey === 'post') {
+  //       createPage({
+  //         path: slug,
+  //         component: require.resolve(PostTemplate),
+  //         context: {
+  //           id: post.id,
+  //           previousPostId,
+  //           nextPostId,
+  //           siteTitle,
+  //           siteDescription,
+  //           siteGreeting,
+  //           copyrightMessage,
+  //           socialLinks,
+  //           brand,
+  //           newsletter,
+  //           slug,
+  //         },
+  //       });
+  //     }
+  //   });
+  // }
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {

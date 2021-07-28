@@ -1,8 +1,3 @@
-const path = require('path');
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
-});
-
 const contentPath = 'content/post';
 const assetPath = 'content/assets';
 const mdx = true;
@@ -22,7 +17,6 @@ module.exports = {
       github: 'https://www.github.com/ethriel3695',
       email: 'mailto:ethriel3695@gmail.com',
     },
-    externalLinks: [{ label: '', link: '' }],
     hasNotifications: false,
     categories: [
       'react',
@@ -35,7 +29,6 @@ module.exports = {
       'tailwindcss',
       'storybook',
     ],
-    hasCTA: false,
   },
   plugins: [
     mdx && {
@@ -58,6 +51,14 @@ module.exports = {
           { resolve: `gatsby-remark-smartypants` },
         ],
         remarkPlugins: [require(`remark-slug`)],
+      },
+    },
+    {
+      resolve: 'gatsby-source-storyblok',
+      options: {
+        accessToken: 'wOqc7QZd3KhhYEc1tehr5wtt',
+        homeSlug: 'home',
+        version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
       },
     },
     {
@@ -98,12 +99,6 @@ module.exports = {
       options: {
         path: assetPath,
         name: assetPath,
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-netlify-cms',
-      options: {
-        modulePath: `${__dirname}/src/cms/cms.js`,
       },
     },
     {

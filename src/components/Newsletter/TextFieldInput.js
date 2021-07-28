@@ -1,17 +1,5 @@
 import React from 'react';
 
-// <TextField
-//   {...props}
-//   color="primary"
-//   aria-haspopup="true"
-//   margin="normal"
-//   variant="outlined"
-//   className={classes.textField}
-//   style={props.style}
-// >
-//   {props.children}
-// </TextField>;
-
 const TextFieldInput = props => {
   return (
     <div>

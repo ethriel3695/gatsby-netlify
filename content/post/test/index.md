@@ -1,4 +1,5 @@
 ---
+templateKey: post
 label: Second Test
 title: Test
 description: Test
@@ -7,6 +8,6 @@ author: Your Name Here
 tags:
   - cms
 published: true
-
 ---
+
 **Test**

@@ -12,7 +12,6 @@ export const useSiteMetadata = () => {
           author
           newsletterTitle
           hasNotifications
-          hasCTA
         }
       }
     }
