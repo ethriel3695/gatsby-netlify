@@ -1,5 +1,5 @@
 import React from 'react';
-import { GatsbyImage, StaticImage } from 'gatsby-plugin-image';
+// import { GatsbyImage, StaticImage } from 'gatsby-plugin-image';
 import SbEditable from 'storyblok-react';
 import { Button } from '../Button/Button';
 

@@ -6,7 +6,7 @@ import Content from '../Post/Content';
 
 const Code = CodeBlock;
 
-const InlineCode = props => (
+const InlineCode = (props) => (
   <code {...props} className="font-mono bg-yellow-200 p-1" />
 );
 

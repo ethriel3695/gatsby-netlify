@@ -10,6 +10,7 @@ let assetPath;
 
 // These templates are simply data-fetching wrappers that import components
 const PostTemplate = require.resolve(`./src/templates/post`);
+const ArticleTemplate = require.resolve(`./src/templates/article.js`);
 const HomeTemplate = require.resolve(`./src/templates/page.js`);
 
 // Verify the data directory exists
@@ -32,7 +33,7 @@ exports.onPreBootstrap = ({ store, reporter }, options) => {
     path.join(program.directory, assetPath),
   ];
 
-  dirs.forEach(dir => {
+  dirs.forEach((dir) => {
     Debug.debug(`Initializing ${dir} directory`);
     if (!fs.existsSync(dir)) {
       mkdirp.sync(dir);
@@ -53,7 +54,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           author
         }
       }
-      allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
+      posts: allMdx(
+        sort: { order: DESC, fields: [frontmatter___date] }
+        filter: { slug: { ne: "placeholder/" } }
+      ) {
         nodes {
           id
           slug
@@ -62,19 +66,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             tags
             published
             templateKey
-          }
-        }
-      }
-      posts: allStoryblokEntry(filter: { field_component: { eq: "article" } }) {
-        edges {
-          node {
-            id
-            name
-            slug
-            field_component
-            full_slug
-            path
-            content
+            label
+            description
+            date
           }
         }
       }
@@ -91,15 +85,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         }
       }
-      brandLogo: file(
-        relativePath: { regex: "/(jpg)|(jpeg)|(png)|(svg)/" }
-        relativeDirectory: { eq: "logo" }
+      articles: allStoryblokEntry(
+        filter: { field_component: { eq: "article" } }
       ) {
-        childImageSharp {
-          gatsbyImageData(width: 350, placeholder: BLURRED, layout: CONSTRAINED)
+        edges {
+          node {
+            id
+            name
+            slug
+            field_component
+            full_slug
+            path
+            content
+          }
         }
-        extension
-        publicURL
       }
       newsletter: file(
         relativePath: { regex: "/(pdf)/" }
@@ -116,19 +115,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return;
   }
 
-  // Create Posts and Post pages.
-  // const {
-  //   site: { siteMetadata },
-  //   brandLogo,
-  //   newsletter,
-  // } = result.data;
-  // const pages = result.data.allMdx.nodes;
-
   const entries = result.data.stories.edges;
-  // const posts = result.data.stories.edges;
+  const articles = result.data.articles.edges;
+  const posts = result.data.posts.nodes;
 
   if (entries) {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.node.full_slug === 'home') {
         const page = {
           path: `${entry.node.path}`,
@@ -141,19 +133,45 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     });
   }
+  if (articles) {
+    articles.forEach((entry) => {
+      if (entry.node.full_slug.includes('article')) {
+        const page = {
+          path: `${entry.node.full_slug}`,
+          component: require.resolve(ArticleTemplate),
+          context: {
+            story: entry.node,
+          },
+        };
+        createPage(page);
+      }
+    });
+  }
 
-  // if (posts) {
-  //   posts.forEach(post => {
-  //     const page = {
-  //       path: `${post.node.path}`,
-  //       component: require.resolve(PostTemplate),
-  //       context: {
-  //         story: post.node,
-  //       },
-  //     };
-  //     createPage(page);
-  //   });
-  // }
+  if (posts) {
+    posts.forEach((post, index) => {
+      const { frontmatter } = post;
+      const previousPostId = index === 0 ? null : posts[index - 1].id;
+      const nextPostId =
+        index === posts.length - 1 ? null : posts[index + 1].id;
+      const page = {
+        path: `${post.slug}`,
+        component: require.resolve(PostTemplate),
+        context: {
+          id: post.id,
+          title: frontmatter.title,
+          description: frontmatter.description,
+          label: frontmatter.label,
+          date: frontmatter.date,
+          tags: frontmatter.tags,
+          slug: post.slug,
+          previousPostId,
+          nextPostId,
+        },
+      };
+      createPage(page);
+    });
+  }
 
   // if (pages.length > 0) {
   //   const {
@@ -197,18 +215,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // }
 };
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions;
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode });
+// exports.onCreateNode = ({ node, actions, getNode }) => {
+//   const { createNodeField, createFilePath } = actions;
+//   if (node.internal.type === `MarkdownRemark`) {
+//     console.log(node);
+//     const value = createFilePath({ node, getNode });
 
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
-    });
-  }
-};
+//     createNodeField({
+//       name: `slug`,
+//       node,
+//       value,
+//     });
+//   }
+// };
 
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;

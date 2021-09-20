@@ -12,7 +12,7 @@ import { useSiteMetadata } from '../hooks/siteMetadata';
 import { useSocialInfo } from '../hooks/socialInfo';
 // import { CallToAction } from '../components/Section/CallToAction';
 
-export default function Footer() {
+export default function Footer({ blok }) {
   const {
     copyright,
     // hasCTA
@@ -60,23 +60,24 @@ export default function Footer() {
   }
   return (
     <footer>
-      {/* <div>
-        {links.map((link, index) => (
+      {SocialContainer}
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        {blok.body[0].body[0].body[0].body.map((link, index) => (
           <div key={`container-${index}`} className="text-center">
             <a
               key={index}
-              href={`${link.link}`}
+              href={`${link.link.url}`}
               target="_blank"
               rel="noopener noreferrer"
-              className={'m-4 text-xl textPrimary no-underline'}
+              className={
+                'm-4 text-xl textPrimary no-underline  col-span-12 lg:col-span-1 overflow-hidden'
+              }
             >
-              {`${link.label}`}
+              {`${link.name}`}
             </a>
           </div>
         ))}
       </div>
-    */}
-      {SocialContainer}
       <div>
         <div>
           <div className="text-center p-5">{copyright} </div>

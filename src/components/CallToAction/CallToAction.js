@@ -6,12 +6,10 @@ import { NewsletterSignup } from '../Newsletter/NewsletterSignup';
 
 export const CallToAction = ({ blok }) => {
   return (
-    <div className="max-w-3xl m-auto p-8">
+    <div className="container p-8">
       <SbEditable content={blok} key={blok._uid}>
-        <h2 className="text-center" key={`what!`}>
-          {blok.headline}
-        </h2>
-        <p className="">{blok.text}</p>
+        <h3 key={blok._uid}>{blok.headline}</h3>
+        <p className="text-lg text-gray-800 mb-2 text-left">{blok.text}</p>
         <ConditionalWrapper
           condition={blok.isNewsletter}
           wrapper={children => (

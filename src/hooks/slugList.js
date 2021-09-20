@@ -9,6 +9,7 @@ export const useSlugList = () => {
           frontmatter: {
             published: { eq: true }
             tags: { nin: ["blog", "thanks"] }
+            templateKey: { ne: "article" }
           }
         }
       ) {

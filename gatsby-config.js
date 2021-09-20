@@ -91,7 +91,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: contentPath,
-        name: contentPath,
+        name: 'Posts directly in Repository',
       },
     },
     {

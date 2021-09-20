@@ -37,13 +37,14 @@ const MenuMobile = ({ navs, isOpen, setIsOpen }) => {
               variants={menuItem}
             >
               <NavItem
+                exact="true"
                 key={`menu_desktop_link${key}`}
-                to={nav.route}
+                to={nav.link.url}
                 onClick={() => setIsOpen(false)}
                 className="font-semibold text-4xl text-gray-300 no-underline"
                 activeClassName="textPrimary"
               >
-                {nav.label}
+                {nav.name}
               </NavItem>
             </motion.li>
           ))}
@@ -56,8 +57,7 @@ const MenuMobile = ({ navs, isOpen, setIsOpen }) => {
 MenuMobile.propTypes = {
   navs: PropTypes.arrayOf(
     PropTypes.shape({
-      route: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
     })
   ),
   isOpen: PropTypes.bool.isRequired,

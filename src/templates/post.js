@@ -1,31 +1,27 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import LayoutContainer from '../components/UI/LayoutContainer';
+import Layout from '../components/layout';
 import PostContainer from '../components/Post/PostContainer';
 
-export default function Post({ pageContext, data: { mdx: post } }) {
+export default function Post({ pageContext, location, data: { mdx: post } }) {
   return (
-    <LayoutContainer
-      siteTitle={pageContext.siteTitle}
-      brand={pageContext.brand}
-      newsletter={pageContext.newsletter}
-      copyright={pageContext.copyrightMessage}
-      title={post.frontmatter.title}
-      description={post.frontmatter.description}
-      categories={post.frontmatter.categories}
-    >
+    <Layout location={location}>
       <PostContainer data={post.body} frontmatter={post.frontmatter} />
-    </LayoutContainer>
+    </Layout>
   );
 }
 
 export const pageQuery = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     mdx(slug: { eq: $slug }) {
       frontmatter {
         title
         tags
-        date(formatString: "dddd MMMM Do, YYYY")
+        published
+        templateKey
+        label
+        description
+        date
       }
       body
     }

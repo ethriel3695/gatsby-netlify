@@ -3,6 +3,8 @@ import SbEditable from 'storyblok-react';
 import Teaser from './teaser';
 import { CallToAction, CallToActionHero } from './CallToAction/index';
 import { Button } from './Button/Button';
+import { Header } from './Header/Header';
+import Footer from './Footer';
 import GoogleCalendar from './Calendar/GoogleCalendar';
 
 const Components = {
@@ -11,6 +13,8 @@ const Components = {
   call_to_action_wide_image: CallToActionHero,
   button: Button,
   google_calendar: GoogleCalendar,
+  header: Header,
+  footer: Footer,
 };
 
 const DynamicComponent = ({ blok }) => {

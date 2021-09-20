@@ -7687,6 +7687,11 @@ gatsby-source-storyblok@^3.0.1:
     json-stringify-safe "^5.0.1"
     storyblok-js-client "^4.0.6"
 
+gatsby-storyblok-image@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/gatsby-storyblok-image/-/gatsby-storyblok-image-0.3.0.tgz#9036b11d61029ce9b96830b74992997356df4405"
+  integrity sha512-MApIa0AF26zjpSH3lZsakA/sE7iLLTs/7QuNEk1VOHU1YH/3lE+buRAxxpIaxdHyG4bze6t6ZrEN77oXZ3eXQQ==
+
 gatsby-telemetry@^2.10.0:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/gatsby-telemetry/-/gatsby-telemetry-2.10.0.tgz#ebc7e74e10d1ddc88aa69c8288eb3984c58a8fa7"
@@ -15003,6 +15008,11 @@ storyblok-react@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/storyblok-react/-/storyblok-react-0.1.2.tgz#798672e1111cec68dc487985b1fbba15129fc90d"
   integrity sha512-68KtSgkAT/0XZ9diz3wfoPl6xOt3WJmCv03qZOZUNPs1uDFh1FHF7P9OHt6TfMcxPrv3ldjTypkQXbFdT7JnvA==
+
+storyblok-rich-text-react-renderer@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/storyblok-rich-text-react-renderer/-/storyblok-rich-text-react-renderer-2.3.1.tgz#70db4f45d87cfafaa2a12d2b7f4b6e811f1fdfb0"
+  integrity sha512-9G5G/wsVW/md88WoSWfaP42c+3SqOuDhk1n23yg0aD74rRuBFyS8cq2wiYf9JZWxT0Oz1BxNyFxetjYcRDVVtQ==
 
 stream-array@^1.1.2:
   version "1.1.2"

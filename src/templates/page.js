@@ -12,18 +12,18 @@ const IndexPage = ({ pageContext, location }) => {
   let story = pageContext.story;
   story = useStoryblok(story, location);
 
-  const components = story.content.body.map(blok => {
+  const components = story.content.body.map((blok) => {
     return <DynamicComponent blok={blok} key={blok._uid} />;
   });
 
   return (
-    <Layout>
+    <Layout location={location}>
       <SbEditable content={story.content}>
-        <Seo title="Home" />
+        <Seo title="Home" description="description" keywords={['categories']} />
         {components}
         <StaticImage
           src="../images/gatsby-icon.png"
-          width={'100%'}
+          width={100}
           quality={95}
           formats={['AUTO', 'WEBP', 'AVIF']}
           alt="A Gatsby Logo"

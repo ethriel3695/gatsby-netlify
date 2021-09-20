@@ -1,10 +1,12 @@
-export const buildNav = navList => {
+export const buildNav = (navList) => {
   let navs = [];
   let navObject = null;
-  navList.allMdx.nodes.map(node => {
+  navList.allMdx.nodes.map((node) => {
     navObject = {
-      route: `/${node.slug}`,
-      label: node.frontmatter.label,
+      link: {
+        url: `/${node.slug}`,
+      },
+      name: node.frontmatter.label,
     };
     navs.push(navObject);
     return true;

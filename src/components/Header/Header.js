@@ -1,42 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
 import { FaBars } from 'react-icons/fa';
-import { useBrandData } from '../../hooks/brandData';
 import MenuMobile from '../Menu/MenuMobile';
 import NavItem from '../Menu/NavItem';
 import { useSlugList } from '../../hooks/slugList';
 import { buildNav } from '../../utils/buildNav';
 
-const Header = () => {
+export const Header = ({ blok }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const data = useBrandData();
+  useEffect(() => {
+    document
+      .querySelectorAll('body, html')
+      .forEach((e) =>
+        e.classList[isOpen ? 'add' : 'remove']('overflow-hidden')
+      );
+  }, [isOpen]);
   const navList = useSlugList();
   let navs = [];
   if (navList) {
     navs = buildNav(navList);
-  }
-  let brandLogo = false;
-  if (data) {
-    brandLogo = data.brandLogo;
+    console.log(navs);
+    blok.nav_links.push(...navs);
+    console.log(blok.nav_links);
   }
   const alt = `This is the logo and return to home button for the site`;
-  let logo = null;
   let BrandContainer = null;
 
-  if (brandLogo) {
-    if (!brandLogo.childImageSharp && brandLogo.extension === 'svg') {
-      logo = brandLogo.publicURL;
-      BrandContainer = <img src={logo} className="headerLogoSize" alt={alt} />;
-    } else {
-      logo = brandLogo.childImageSharp.gatsbyImageData;
-      BrandContainer = (
-        <GatsbyImage image={logo} className="headerLogoSize" alt={alt} />
-      );
-    }
-  } else {
-    brandLogo = false;
+  if (blok.logo) {
+    BrandContainer = (
+      <img src={blok.logo} className="headerLogoSize" alt={alt} />
+    );
   }
   return (
     <div
@@ -55,24 +49,28 @@ const Header = () => {
             onClick={() => setIsOpen(true)}
             aria-label="Open Menu"
           >
-            <FaBars className="h-6 w-auto text-gray-900 fill-current -mt-1" />
+            <FaBars className="h-6 w-auto text-gray-900 fill-current mt-1 mr-3" />
           </button>
           <div className="hidden sm:block">
-            {navs.map((nav, key) => (
+            {blok.nav_links.map((nav, key) => (
               <NavItem
                 key={`menu_desktop_link${key}`}
-                to={nav.route}
+                to={nav.link.url}
                 activeClassName="borderPrimaryActive"
               >
-                {nav.label}
+                {nav.name}
               </NavItem>
             ))}
           </div>
         </div>
       </div>
-      <MenuMobile isOpen={isOpen} setIsOpen={setIsOpen} navs={navs} />
+      {isOpen && (
+        <MenuMobile
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          navs={blok.nav_links}
+        />
+      )}
     </div>
   );
 };
-
-export default Header;
